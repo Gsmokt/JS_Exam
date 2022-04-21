@@ -39,10 +39,9 @@ class Ball {
     this.ctx.fillStyle = "orange";
     this.ctx.fill();
     this.ctx.stroke();
+    console.log(this.x, this.y);
     this.x += this.vector.x;
     this.y += this.vector.y;
-
-    console.log(this.x, this.y);
   }
 }
 
