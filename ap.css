@@ -10,21 +10,3 @@ body{
     justify-content: center;
     align-items: center;
 }
-/* .wrapper{
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    height: 400px; 
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-}
-.wrapper div{
-    border: 1px solid black;
-    width: 70px;
-    height: 70px;
-}
-.ball{
-    background-color: green;
-} */
