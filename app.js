@@ -1,6 +1,5 @@
 const board = [
   ["X", "X", "X", "X", "X", "X", "X"],
-  ["X", "1", "0", "0", "0", "0", "X"],
   ["X", "0", "0", "0", "0", "0", "X"],
   ["X", "0", "0", "0", "0", "0", "X"],
   ["X", "0", "0", "0", "0", "0", "X"],
@@ -8,6 +7,7 @@ const board = [
   ["X", "0", "0", "0", "0", "0", "X"],
   ["X", "0", "0", "0", "0", "0", "X"],
   ["X", "0", "0", "0", "0", "0", "X"],
+  ["X", "0", "0", "0", "0", "1", "X"],
   ["X", "X", "X", "X", "X", "X", "X"],
 ];
 
@@ -64,7 +64,7 @@ class Game {
         console.log("Jesteś znowu na swoim miejscu!");
       }
       this.isBallOnStartingPosition();
-    }, 200);
+    }, 100);
   }
   isBallOnStartingPosition() {
     if (board[this.ball.y][this.ball.x] === "1") {
