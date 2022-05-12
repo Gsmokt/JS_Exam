@@ -1,6 +1,6 @@
 const board = [
-  ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"], // Jesli Y ma odbijac w przeciwnym kierunku, to wystarczy ustawic
-  ["X", "1", "0", "X", "X", "X", "X", "X", "X", "X", "X", "X"], // wektory, tak ajak przy skosie
+  ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"], // Jesli Y ma odbijać w przeciwnym kierunku, to wystarczy ustawić
+  ["X", "1", "0", "X", "X", "X", "X", "X", "X", "X", "X", "X"], // wektory, tak jak przy skosie
   ["X", "0", "0", "0", "X", "X", "X", "X", "X", "X", "X", "X"],
   ["X", "0", "0", "0", "0", "X", "X", "X", "X", "X", "X", "X"],
   ["X", "0", "0", "0", "0", "0", "X", "X", "X", "X", "X", "X"],
@@ -60,8 +60,17 @@ class Square {
     if (!index) {
       return;
     } else {
-      // ball.vector.y *= -1;    w razie czego zmiana wektorow
-      // ball.vector.x *= -1;
+      const Y = ball.vector.y;
+      const X = ball.vector.x;
+      const ballSquareCollision = () => {
+        if(ball.vector.y !== Y || ball.vector.x !== X) return; 
+        const randY = Math.floor(Math.random() * (2 -1 +1) +1);
+        const randX = Math.floor(Math.random() * (2 -1 +1) +1);
+        ball.vector.y *= (randY === 2 ? -1 : 1);   
+        ball.vector.x *= (randX === 2 ? -1 : 1); 
+        return ballSquareCollision();
+      }
+      ballSquareCollision();
       board[y][x] = "0";
       const square = document.querySelector(`[data-x="${x}"][data-y="${y}"]`);
       square.textContent = "";
@@ -135,6 +144,9 @@ class Game {
   }
   makeMove() {
     console.log(this.ball.vector.x, this.ball.vector.y);
+    if(this.board[this.ball.y][this.ball.x] === 'Y'){
+        this.square.move(this.ball.x, this.ball.y,this.board, this.ball);
+      }
     if (this.willColideOnBothAxis()) {
       this.ball.vector.y *= -1;
       this.ball.vector.x *= -1;
@@ -145,7 +157,7 @@ class Game {
   }
   willColideOnBothAxis() {
     if (
-      this.board[this.ball.y - this.ball.vector.y][
+      this.board[this.ball.y + this.ball.vector.y][                          // nie mam pojecia, jak ustawić rogi :(
         this.ball.x + this.ball.vector.x
       ] === "X" &&
       this.board[this.ball.y + this.ball.vector.y][
